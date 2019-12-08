@@ -21,6 +21,10 @@ Route::group(['middleware' => ['auth', 'Role'], 'roles' => ['admin']], function 
     Route::resource('/employees', 'EmployeeController');
 
     Route::get('/attendance', 'AttendanceController@index')->name('attendance');
+    Route::get('/latetime', 'AttendanceController@indexLatetime')->name('indexLatetime');
+    Route::get('/leave', 'LeaveController@index')->name('leave');
+    Route::get('/overtime', 'LeaveController@indexOvertime')->name('indexOvertime');
+
 
 
     Route::get('/admin', function () {
@@ -29,6 +33,8 @@ Route::group(['middleware' => ['auth', 'Role'], 'roles' => ['admin']], function 
 
 
     Route::resource('/schedule', 'ScheduleController');
+
+
 
 
 });
@@ -50,3 +56,10 @@ Route::get('/attendance/assign', function () {
 })->name('attendance.login');
 
 Route::post('/attendance/assign', 'AttendanceController@assign')->name('attendance.assign');
+
+
+Route::get('/leave/assign', function () {
+    return view('attendance_leave_login');
+})->name('leave.login');
+
+Route::post('/leave/assign', 'LeaveController@assign')->name('leave.assign');

@@ -6,11 +6,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Attendance
+            LateTime
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Attendance</li>
+            <li class="active">LateTime</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -21,7 +21,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <a href="/attendance/assign" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                        <a href="/attendance" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><b>Attendance Table</b></a>
                     </div>
                     <div class="box-body">
                         <table id="example1" class="table table-bordered">
@@ -29,26 +29,20 @@
                                 <th>Date</th>
                                 <th>Employee ID</th>
                                 <th>Name</th>
-                                <th>Attendance</th>
+                                <th>Late Time Duration</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
                             </thead>
                             <tbody>
-                                @foreach( $attendances as $attendance)
+                                @foreach($latetimes as $latetime)
 
                                 <tr>
-                                    <td>{{$attendance->attendance_date}}</td>
-                                    <td>{{$attendance->user_id}}</td>
-                                    <td>{{$attendance->user->name}}</td>
-                                    <td>{{$attendance->attendance_time}}
-                                        @if( $attendance->status == 1 )
-                                        <span class="label label-warning pull-right">On Time</span>
-                                        @else
-                                        <span class="label label-danger pull-right">Late</span>
-                                        @endif
-                                    </td>
-                                    <td>{{$attendance->user->schedules->first()->time_in}} </td>
-                                    <td>{{$attendance->user->schedules->first()->time_out}}</td>
+                                    <td>{{$latetime->latetime_date}}</td>
+                                    <td>{{$latetime->user_id}}</td>
+                                    <td>{{$latetime->user->name}}</td>
+                                    <td>{{$latetime->duration}}</td>
+                                    <td>{{$latetime->user->schedules->first()->time_in}} </td>
+                                    <td>{{$latetime->user->schedules->first()->time_out}}</td>
                                 </tr>
 
                                 @endforeach
