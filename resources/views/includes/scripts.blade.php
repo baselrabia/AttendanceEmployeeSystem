@@ -7,7 +7,7 @@
 <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  $.widget.bridge('uibutton', $.ui.button);
+    $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -42,4 +42,9 @@
 <script src="/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
-
+<!-- DataTables -->
+<script>
+    $(document).ready(function() {
+        $('#example1').DataTable();
+    });
+</script>

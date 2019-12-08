@@ -16,17 +16,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('admin.employee')->with(['employees'=> User::paginate(10), 'schedules'=>Schedule::all()]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.employee')->with(['employees'=> User::all(), 'schedules'=>Schedule::all()]);
     }
 
     /**
@@ -41,7 +31,7 @@ class EmployeeController extends Controller
             'name' => 'required|string|min:3|max:64|alpha_dash',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'pincode' => 'required|numeric|min:4',
+            'pin_code' => 'required|numeric|min:4',
             'schedule' => 'required|exists:schedules,slug',
         ]);
 
@@ -50,7 +40,7 @@ class EmployeeController extends Controller
         $employee->name = $request->name;
         $employee->email = $request->email;
         $employee->password = bcrypt($request->password);
-        $employee->pin_code = bcrypt($request->pincode);
+        $employee->pin_code = bcrypt($request->pin_code);
         $employee->save();
 
         if($request->schedule){
@@ -70,32 +60,10 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param   \App\User  $employee
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $employee)
@@ -104,7 +72,7 @@ class EmployeeController extends Controller
             'name' => 'required|string|min:3|max:64|alpha_dash',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'pincode' => 'required|numeric|min:4',
+            'pin_code' => 'required|numeric|min:4',
             'schedule' => 'required|exists:schedules,slug',
         ]);
 
@@ -112,7 +80,7 @@ class EmployeeController extends Controller
         $employee->name = $request->name;
         $employee->email = $request->email;
         $employee->password = bcrypt($request->password);
-        $employee->pin_code = bcrypt($request->pincode);
+        $employee->pin_code = bcrypt($request->pin_code);
         $employee->save();
 
         if ($request->schedule) {
@@ -132,7 +100,7 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param   \App\User  $employee
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $employee)

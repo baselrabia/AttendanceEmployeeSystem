@@ -19,7 +19,7 @@ class CreateAttendancesTable extends Migration
 
             $table->time('attendance_time')->default(date("H:i"));
             $table->date('attendance_date');
-            $table->binary('status')->default(1);
+            $table->boolean('status')->default(1);
 
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

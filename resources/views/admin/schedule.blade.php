@@ -40,7 +40,6 @@
                                     <td> {{$schedule->time_in}} </td>
                                     <td> {{$schedule->time_out}} </td>
                                     <td>
-                                        @include('includes.schedule_modal2')
 
                                         <a href="#edit{{$schedule->slug}}" data-toggle="modal" class="btn btn-success btn-sm edit btn-flat"><i class='fa fa-edit'></i> Edit</a>
                                         <a href="#delete{{$schedule->slug}}" data-toggle="modal" class="btn btn-danger btn-sm delete btn-flat"><i class='fa fa-trash'></i> Delete</a>
@@ -58,7 +57,10 @@
     </section>
 </div>
 
+@foreach($schedules as $schedule)
+@include('includes.edit_delete_schedule')
+@endforeach
 
-@include('includes.schedule_modal')
+@include('includes.add_schedule')
 
 @endsection

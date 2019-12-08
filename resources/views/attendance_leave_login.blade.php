@@ -88,26 +88,43 @@
 
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
-    <div id="app" class="wrapper">
 
-        @include('includes.navbar')
-        @include('includes.profile_modal')
-        @include('includes.menubar')
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <b>Attendance Login</b>
+        </div>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
 
-        @section('footer')
-        @include('includes.footer')
-        @show
+        <div class="login-box-body">
+            <p class="login-box-msg">Sign in to assign your Attendance</p>
+            @include('includes.messages')
+
+            <form class="form-horizontal" method="POST" action="{{ route('attendance.assign') }}">
+                @csrf
+                <div class="form-group has-feedback">
+                    <input type="email" class="form-control" name="email" placeholder="input Your E-mail" required autofocus>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" name="pin_code" placeholder="input Your Pin Code ( 4 Digits )" required>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
 
     </div>
 
     @include('includes.scripts')
 
-    @yield('script')
 
 </body>
 

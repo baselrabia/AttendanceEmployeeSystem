@@ -20,9 +20,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'Role'], 'roles' => ['admin']], function () {
     Route::resource('/employees', 'EmployeeController');
 
-    Route::get('/attendance', function () {
-        return view('admin.attendance');
-    })->name('attendance');
+    Route::get('/attendance', 'AttendanceController@index')->name('attendance');
 
 
     Route::get('/admin', function () {
@@ -39,10 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/simple', 'HomeController@simple')->name('simple');
-    Route::get('/datatable', 'HomeController@datatable')->name('datatable');
-    Route::get('/ajax', 'HomeController@ajax')->name('ajax');
-
 
 
     Route::resource('/employees', 'EmployeeController', ['only' => [
@@ -51,6 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
+Route::get('/attendance/assign', function () {
+    return view('attendance_leave_login');
+})->name('attendance.login');
 
-
-
+Route::post('/attendance/assign', 'AttendanceController@assign')->name('attendance.assign');

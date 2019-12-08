@@ -51,14 +51,17 @@ class ScheduleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param   \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Schedule $schedule)
     {
+        $request['time_in'] = str_split($request->time_in, 5)[0];
+        $request['time_out'] = str_split($request->time_out, 5)[0];
+
         request()->validate([
             'slug' => 'required|string|min:3|max:32|alpha_dash',
-            'time_in' => 'required|date_format:H:i',
+            'time_in' => 'required|date_format:H:i|before:time_out',
             'time_out' => 'required|date_format:H:i',
         ]);
 
@@ -66,10 +69,6 @@ class ScheduleController extends Controller
         $schedule->time_in = $request->time_in;
         $schedule->time_out = $request->time_out;
         $schedule->save();
-
-
-
-
 
         return redirect()->route('schedule.index')->with('success', 'Schedule Has Been Updated Successfully');
 
@@ -79,7 +78,7 @@ class ScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param   \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
     public function destroy(Schedule $schedule)

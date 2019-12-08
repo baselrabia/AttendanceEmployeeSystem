@@ -18,7 +18,7 @@ class CreateLeavesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->time('leave_time')->default(date("H:i"));
             $table->date('leave_date');
-            $table->binary('status')->default(1);
+            $table->boolean('status')->default(1);
 
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

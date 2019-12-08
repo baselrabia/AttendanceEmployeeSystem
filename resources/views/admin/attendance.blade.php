@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+
+
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -26,15 +28,32 @@
                     <div class="box-body">
                         <table id="example1" class="table table-bordered">
                             <thead>
-                                <th class="hidden"></th>
                                 <th>Date</th>
                                 <th>Employee ID</th>
                                 <th>Name</th>
+                                <th>Attendance</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
-                                <th>Tools</th>
                             </thead>
                             <tbody>
+                                @foreach( $attendances as $attendance)
+
+                                <tr>
+                                    <td>{{$attendance->attendance_date}}</td>
+                                    <td>{{$attendance->user_id}}</td>
+                                    <td>{{$attendance->user->name}}</td>
+                                    <td>{{$attendance->attendance_time}}
+                                        @if( $attendance->status == 1 )
+                                        <span class="label label-warning pull-right">ontime</span>
+                                        @else
+                                        <span class="label label-danger pull-right">late</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$attendance->user->schedules->first()->time_in}} </td>
+                                    <td>{{$attendance->user->schedules->first()->time_out}}</td>
+                                </tr>
+
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -44,6 +63,5 @@
         </div>
     </section>
 </div>
-@include('includes.attendance_modal')
 
 @endsection

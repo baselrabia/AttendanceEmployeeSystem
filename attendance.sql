@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2019 at 10:24 PM
+-- Generation Time: Dec 08, 2019 at 05:30 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -33,10 +33,18 @@ CREATE TABLE `attendances` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `attendance_time` time NOT NULL DEFAULT '18:09:00',
   `attendance_date` date NOT NULL,
-  `status` blob NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attendances`
+--
+
+INSERT INTO `attendances` (`id`, `user_id`, `attendance_time`, `attendance_date`, `status`, `created_at`, `updated_at`) VALUES
+(10, 6, '02:25:54', '2019-12-08', 1, '2019-12-08 00:25:54', '2019-12-08 00:25:54'),
+(12, 8, '02:57:35', '2019-12-08', 0, '2019-12-08 00:57:35', '2019-12-08 00:57:35');
 
 -- --------------------------------------------------------
 
@@ -64,7 +72,7 @@ CREATE TABLE `leaves` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `leave_time` time NOT NULL DEFAULT '18:13:00',
   `leave_date` date NOT NULL,
-  `status` blob NOT NULL DEFAULT '1',
+  `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -188,8 +196,8 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`id`, `slug`, `time_in`, `time_out`, `created_at`, `updated_at`) VALUES
-(6, 'First', '09:00:00', '17:00:00', '2019-12-04 19:06:52', '2019-12-04 19:48:55'),
-(7, 'Second', '08:00:00', '16:00:00', '2019-12-04 19:46:37', '2019-12-04 19:49:09');
+(6, 'First', '09:00:00', '17:00:00', '2019-12-04 19:06:52', '2019-12-08 00:08:08'),
+(7, 'Second', '01:00:00', '17:00:00', '2019-12-04 19:46:37', '2019-12-08 00:57:09');
 
 -- --------------------------------------------------------
 
@@ -241,7 +249,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `pin_code`, `permissions`, `email_ve
 (2, 'ahmed33', 'ahmed33@gmail.com', NULL, NULL, NULL, '$2y$10$3NdaQLDtvq9EnnMZCEJrmOR2xLwPAFSxNAsIKDYF05gxPNpr2xUBa', NULL, '2019-12-03 07:31:28', '2019-12-03 07:31:28'),
 (3, 'mohamed33', 'mohamed33@gmail.com', NULL, NULL, NULL, '$2y$10$Y0Yh43eVwVJQVf7t0xnDzeCl//e736bklYECl2LBmc82W0WxTYlcq', NULL, '2019-12-03 07:31:57', '2019-12-03 07:31:57'),
 (4, 'mazen', 'mazen@gmail.com', NULL, NULL, NULL, '$2y$10$AQwSWtLyqhQyZjzI6GChkOpz1AWltAiaT.xPy.PvZ12xWkxMuDixG', NULL, '2019-12-03 07:32:31', '2019-12-03 07:32:31'),
-(6, 'baselrabias', 'baselrabia2008@gmail.com', '$2y$10$UM7YKtbWNL5tuPz..dWteu3q.ik6FCI4DIOFs7Gdkjmx9YpMA00oq', NULL, NULL, '$2y$10$L51nd1c1fOzDwtKyx08uC.xwHZYGO9OgvRRUB4/vO/1Y9URdT0DEy', NULL, '2019-12-05 18:45:43', '2019-12-05 18:45:43'),
+(6, 'baselrabias', 'baselrabia2008@gmail.com', '$2y$10$wsEg81ZUwfLhJXM2yYXreu31o/I1YIraSDS68j2hXzrgsJ9Fpdw1K', NULL, NULL, '$2y$10$mWrhmt8yD0PYC.9ngMMDouQMEmkhhp5sux3anBmjPvDN0BtlIBqo.', NULL, '2019-12-05 18:45:43', '2019-12-07 23:14:43'),
 (8, 'baselraba', 'baselrabi@gmail.com', '$2y$10$T9MoxyGOpF7xbnvpHOKWK.inJXovsDG7IoPKfDBqJ0Qx.4qxMHq0e', NULL, NULL, '$2y$10$vIjfeG6dMqSgldSgiK7oGulByaidbZqguzPQsfYOGXpTxpkUsq/jK', NULL, '2019-12-05 19:17:57', '2019-12-05 19:20:56');
 
 --
@@ -331,7 +339,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `latetimes`
@@ -367,13 +375,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
