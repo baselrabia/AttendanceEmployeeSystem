@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Role;
 use App\Schedule;
-use Illuminate\Http\Request;
+use App\Http\Requests\EmployeeRec;
 
 class EmployeeController extends Controller
 {
@@ -25,16 +25,9 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRec $request)
     {
-        request()->validate([
-            'name' => 'required|string|min:3|max:64|alpha_dash',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'pin_code' => 'required|numeric|min:4',
-            'schedule' => 'required|exists:schedules,slug',
-        ]);
-
+        $request->validated();
 
         $employee = new User;
         $employee->name = $request->name;
@@ -66,16 +59,9 @@ class EmployeeController extends Controller
      * @param   \App\User  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $employee)
+    public function update(EmployeeRec $request, User $employee)
     {
-        request()->validate([
-            'name' => 'required|string|min:3|max:64|alpha_dash',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'pin_code' => 'required|numeric|min:4',
-            'schedule' => 'required|exists:schedules,slug',
-        ]);
-
+        $request->validated();
 
         $employee->name = $request->name;
         $employee->email = $request->email;

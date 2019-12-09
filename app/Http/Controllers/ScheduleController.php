@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Schedule;
-use Illuminate\Http\Request;
+use App\Http\Requests\ScheduleEmp;
 
 class ScheduleController extends Controller
 {
@@ -23,15 +24,9 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ScheduleEmp $request)
     {
-
-        request()->validate([
-            'slug' => 'required|string|min:3|max:32|alpha_dash',
-            'time_in' => 'required|date_format:H:i',
-            'time_out' => 'required|date_format:H:i',
-        ]);
-
+        $request->validated();
 
         $schedule = new schedule;
         $schedule->slug = $request->slug;
@@ -54,16 +49,12 @@ class ScheduleController extends Controller
      * @param   \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Schedule $schedule)
+    public function update(ScheduleEmp $request, Schedule $schedule)
     {
         $request['time_in'] = str_split($request->time_in, 5)[0];
         $request['time_out'] = str_split($request->time_out, 5)[0];
 
-        request()->validate([
-            'slug' => 'required|string|min:3|max:32|alpha_dash',
-            'time_in' => 'required|date_format:H:i|before:time_out',
-            'time_out' => 'required|date_format:H:i',
-        ]);
+        $request->validated();
 
         $schedule->slug = $request->slug;
         $schedule->time_in = $request->time_in;

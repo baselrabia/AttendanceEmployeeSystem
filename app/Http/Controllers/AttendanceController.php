@@ -6,8 +6,8 @@ use DateTime;
 use App\User;
 use App\Latetime;
 use App\Attendance;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AttendanceEmp;
 
 
 class AttendanceController extends Controller
@@ -40,14 +40,9 @@ class AttendanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function assign(Request $request)
+    public function assign(AttendanceEmp $request)
     {
-        request()->validate([
-            'email' => 'required|string|email|max:255|exists:users',
-            'pin_code' => 'required|numeric|min:4',
-        ]);
-
-
+        $request->validated();
 
         if ($employee = User::whereEmail(request('email'))->first()){
 
@@ -61,7 +56,7 @@ class AttendanceController extends Controller
                         if (!($employee->schedules->first()->time_in >= $attendance->attendance_time)){
                             $attendance->status = 0;
                         AttendanceController::lateTime($employee);
-                        }
+                        };
                         $attendance->save();
 
                     }else{

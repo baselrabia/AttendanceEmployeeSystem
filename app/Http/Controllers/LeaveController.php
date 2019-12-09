@@ -6,7 +6,7 @@ use DateTime;
 use App\User;
 use App\Overtime;
 use App\Leave;
-use Illuminate\Http\Request;
+use App\Http\Requests\AttendanceEmp;
 use Illuminate\Support\Facades\Hash;
 
 class LeaveController extends Controller
@@ -40,14 +40,9 @@ class LeaveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function assign(Request $request)
+    public function assign(AttendanceEmp $request)
     {
-        request()->validate([
-            'email' => 'required|string|email|max:255|exists:users',
-            'pin_code' => 'required|numeric|min:4',
-        ]);
-
-
+        $request->validated();
 
         if ($employee = User::whereEmail(request('email'))->first()) {
 
