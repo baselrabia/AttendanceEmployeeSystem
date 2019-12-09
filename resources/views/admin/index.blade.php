@@ -16,28 +16,8 @@
 
     <!-- Main content -->
     <section class="content">
-        <?php
-        if (isset($_SESSION['error'])) {
-            echo "
-            <div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-warning'></i> Error!</h4>
-              " . $_SESSION['error'] . "
-            </div>
-          ";
-            unset($_SESSION['error']);
-        }
-        if (isset($_SESSION['success'])) {
-            echo "
-            <div class='alert alert-success alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-check'></i> Success!</h4>
-              " . $_SESSION['success'] . "
-            </div>
-          ";
-            unset($_SESSION['success']);
-        }
-        ?>
+        @include('includes.messages')
+
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-lg-3 col-xs-6">
@@ -45,7 +25,7 @@
                 <div class="small-box bg-aqua">
                     <div class="inner">
 
-                        <h3> 23 </h3>
+                        <h3> {{$data[0]}} </h3>
 
 
                         <p>Total Employees</p>
@@ -62,7 +42,7 @@
                 <div class="small-box bg-green">
                     <div class="inner">
 
-                        <h3> 70.27 <sup style='font-size: 20px'>%</sup></h3>
+                        <h3> {{$data[3]}} <sup style='font-size: 20px'>%</sup></h3>
 
                         <p>On Time Percentage</p>
                     </div>
@@ -77,7 +57,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3> 10 </h3>
+                        <h3> {{$data[1]}} </h3>
                         <p>On Time Today</p>
                     </div>
                     <div class="icon">
@@ -91,9 +71,9 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3> 11 </h3>
+                        <h3> {{$data[2]}} </h3>
 
-                                <p>Late Today</p>
+                        <p>Late Today</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-alert-circled"></i>
