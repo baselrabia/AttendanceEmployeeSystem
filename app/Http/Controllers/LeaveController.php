@@ -78,7 +78,7 @@ class LeaveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function overTime(User $employee)
+    public static function overTime(User $employee)
     {
         $current_t = new DateTime(date("H:i:s"));
         $start_t = new DateTime($employee->schedules->first()->time_out);
