@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/v1/attendance/assign', 'APIController@attendance');
 Route::post('/v1/leave/assign', 'APIController@leave');
+
+
+Route::post('/v1/check/assign', 'APIController@check');

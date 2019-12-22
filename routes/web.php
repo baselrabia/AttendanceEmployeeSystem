@@ -29,6 +29,9 @@ Route::group(['middleware' => ['auth', 'Role'], 'roles' => ['admin']], function 
 
     Route::resource('/schedule', 'ScheduleController');
 
+    Route::get('/check', 'CheckController@index')->name('check');
+
+
 
 
 

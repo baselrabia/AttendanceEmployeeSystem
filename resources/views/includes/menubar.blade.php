@@ -14,7 +14,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">REPORTS</li>
-            
+
             <li class=""><a href="/admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
             <li class="header">MANAGE</li>
@@ -35,6 +35,7 @@
 
 
             <li class="header">TABLES</li>
+            <li><a href="/check"><i class="fa fa-calendar"></i> <span>Check</span></a></li>
 
             <li><a href="/attendance"><i class="fa fa-calendar"></i> <span>Attendance</span></a></li>
             <li><a href="/latetime"><i class="fa fa-circle-o"></i> <span>Latetime</span></a></li>

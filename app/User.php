@@ -15,6 +15,10 @@ class User extends Authenticatable
     {
         return 'name';
     }
+    public function check()
+    {
+        return $this->hasMany(Check::class);
+    }
 
     public function attendance()
     {

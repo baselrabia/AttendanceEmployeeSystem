@@ -4,12 +4,69 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Attendance;
+use App\Check;
 use App\Leave;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AttendanceEmp;
+use Illuminate\Http\Request;
+
 
 class ApiController extends Controller
 {
+    /**
+     * assign checks for attendance and leave for the employee.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function check(AttendanceEmp $request)
+    {
+        $request->validated();
+
+        if ($employee = User::whereEmail(request('email'))->first()) {
+
+            if (Hash::check($request->pin_code, $employee->pin_code)) {
+
+
+
+
+                if(null == Check::whereUser_id($employee->id)->latest()->first()){
+                    ApiController::newAttandance($employee);
+                }else{
+                    
+                    if(Check::whereUser_id($employee->id)->latest()->first()->leave_time !== null){
+                        ApiController::newAttandance($employee);
+                    } else {
+                        $check = Check::whereUser_id($employee->id)->latest()->first();
+                        $check->leave_time = date("Y-m-d H:i:s");
+                        $check->save();
+                        return response()->json(['success' => 'Successful in assign the leave'], 200);
+                    }
+
+                }
+
+            } else {
+                return response()->json(['error' => 'Failed to assign the attendance'], 404);
+            }
+        }
+        return response()->json(['success' => 'Successful in assign the attendance'], 200);
+    }
+
+    /**
+     * create new attendance.
+     * @param  user  $employee
+     * @return \Illuminate\Http\Response
+     */
+    public function newAttandance($employee){
+        $check = new Check;
+        $check->user_id = $employee->id;
+        $check->attendance_time = date("Y-m-d H:i:s");
+        $check->leave_time = null;
+        $check->save();
+    }
+
+
+
     /**
      * assign attendance to employee.
      *
